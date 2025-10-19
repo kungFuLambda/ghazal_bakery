@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy": "npm run build && firebase deploy --only hosting"
   },
   "dependencies": {
     "@mantine/carousel": "^8.3.1",

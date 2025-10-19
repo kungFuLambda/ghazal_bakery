@@ -14,60 +14,22 @@ import {
   Anchor,
   Divider,
   Center,
-  ActionIcon,
-  Flex,
   Image,
 } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
 import "@mantine/carousel/styles.css";
-import {
-  IconShoppingBag,
-  IconUser,
-  IconCake,
-  IconCoffee,
-  IconBread,
-  IconStar,
-} from "@tabler/icons-react";
+import { Navbar } from "@/components/Navbar";
+import { IconCake, IconCoffee, IconBread } from "@tabler/icons-react";
+import { colors, gradients, fonts } from "@/lib/theme";
 
 export default function Home() {
   return (
     <Box>
       {/* Navigation Header */}
-      <Container size="xl" py="md">
-        <Flex justify="space-between" align="center">
-          <Title
-            order={1}
-            size="2rem"
-            fw={400}
-            style={{ fontFamily: "var(--font-playfair)" }}
-            c="#B28BC2"
-          >
-            Zallè Patisserie
-          </Title>
-          <Group gap="xl">
-            <Anchor c="dimmed" size="sm" fw={500}>
-              Shop
-            </Anchor>
-            <Anchor c="dimmed" size="sm" fw={500}>
-              About
-            </Anchor>
-            <Anchor c="dimmed" size="sm" fw={500}>
-              Contact
-            </Anchor>
-            <Group gap="sm">
-              <ActionIcon variant="subtle" color="gray" size="lg">
-                <IconShoppingBag size={20} />
-              </ActionIcon>
-              <ActionIcon variant="subtle" color="gray" size="lg">
-                <IconUser size={20} />
-              </ActionIcon>
-            </Group>
-          </Group>
-        </Flex>
-      </Container>
+      <Navbar />
 
       {/* Image Carousel */}
-      <Container size="lg" pt="xl">
+      <Box>
         <Carousel
           withIndicators
           slideSize="100%"
@@ -77,9 +39,9 @@ export default function Home() {
               width: 12,
               height: 4,
               transition: "width 250ms ease",
-              backgroundColor: "#B28BC2",
+              backgroundColor: colors.primary,
               opacity: 0.3,
-              "&[data-active]": {
+              "&[dataActive]": {
                 opacity: 1,
                 width: 40,
               },
@@ -92,7 +54,7 @@ export default function Home() {
               alt="Artisan Bakery Interior"
               height={400}
               fit="cover"
-              radius="lg"
+              radius={0}
             />
           </Carousel.Slide>
           <Carousel.Slide>
@@ -101,7 +63,7 @@ export default function Home() {
               alt="Fresh Baked Goods"
               height={400}
               fit="cover"
-              radius="lg"
+              radius={0}
             />
           </Carousel.Slide>
           <Carousel.Slide>
@@ -110,11 +72,11 @@ export default function Home() {
               alt="Master Baker at Work"
               height={400}
               fit="cover"
-              radius="lg"
+              radius={0}
             />
           </Carousel.Slide>
         </Carousel>
-      </Container>
+      </Box>
 
       {/* Hero Section */}
       <Container size="xl" py={100}>
@@ -122,7 +84,7 @@ export default function Home() {
           <Stack align="center" gap="lg">
             <Badge
               variant="outline"
-              color="#B28BC2"
+              color={colors.primary}
               size="lg"
               radius="xl"
               fw={400}
@@ -135,7 +97,7 @@ export default function Home() {
               ta="center"
               fw={300}
               style={{
-                fontFamily: "var(--font-playfair)",
+                fontFamily: fonts.heading,
                 lineHeight: 1.2,
                 maxWidth: "800px",
               }}
@@ -145,7 +107,7 @@ export default function Home() {
                 component="span"
                 inherit
                 variant="gradient"
-                gradient={{ from: "#B28BC2", to: "#DFC5FE", deg: 45 }}
+                gradient={gradients.primary}
                 fw={400}
               >
                 {" "}
@@ -153,9 +115,8 @@ export default function Home() {
               </Text>
             </Title>
             <Text size="xl" c="dimmed" ta="center" maw={600} fw={300} lh={1.6}>
-              Discover the finest handcrafted pastries, artisan breads, and
-              exquisite desserts made with premium ingredients and generations
-              of baking expertise.
+              Discover the finest handcrafted pastries, and exquisite desserts
+              made with premium ingredients.
             </Text>
           </Stack>
 
@@ -164,22 +125,12 @@ export default function Home() {
               size="lg"
               radius="xl"
               variant="gradient"
-              gradient={{ from: "#B28BC2", to: "#DFC5FE", deg: 45 }}
+              gradient={gradients.primary}
               c="white"
               fw={500}
               px={40}
             >
-              Explore Our Collection
-            </Button>
-            <Button
-              size="lg"
-              radius="xl"
-              variant="outline"
-              color="#B28BC2"
-              fw={400}
-              px={40}
-            >
-              Visit Our Café
+              Explore Our Creations
             </Button>
           </Group>
         </Stack>
@@ -194,7 +145,7 @@ export default function Home() {
                 order={2}
                 size="2.5rem"
                 fw={300}
-                style={{ fontFamily: "var(--font-playfair)" }}
+                style={{ fontFamily: fonts.heading }}
               >
                 Signature Creations
               </Title>
@@ -214,7 +165,7 @@ export default function Home() {
             >
               <Stack gap="md">
                 <Center>
-                  <IconCake size={40} color="#B28BC2" />
+                  <IconCake size={40} color={colors.primary} />
                 </Center>
                 <Stack gap="xs" align="center">
                   <Title order={3} size="xl" fw={400} ta="center">
@@ -225,13 +176,6 @@ export default function Home() {
                     chocolate and organic ingredients
                   </Text>
                 </Stack>
-                <Group justify="center" gap="xs">
-                  <IconStar size={16} color="#B28BC2" />
-                  <IconStar size={16} color="#B28BC2" />
-                  <IconStar size={16} color="#B28BC2" />
-                  <IconStar size={16} color="#DFC5FE" />
-                  <IconStar size={16} color="#DFC5FE" />
-                </Group>
               </Stack>
             </Card>
 
@@ -243,24 +187,17 @@ export default function Home() {
             >
               <Stack gap="md">
                 <Center>
-                  <IconBread size={40} color="#B28BC2" />
+                  <IconBread size={40} color={colors.primary} />
                 </Center>
                 <Stack gap="xs" align="center">
                   <Title order={3} size="xl" fw={400} ta="center">
-                    Artisan Breads
+                    Small treats
                   </Title>
                   <Text c="dimmed" ta="center" size="sm">
                     Fresh daily breads using traditional techniques and locally
                     sourced organic flour
                   </Text>
                 </Stack>
-                <Group justify="center" gap="xs">
-                  <IconStar size={16} color="#B28BC2" />
-                  <IconStar size={16} color="#B28BC2" />
-                  <IconStar size={16} color="#B28BC2" />
-                  <IconStar size={16} color="#DFC5FE" />
-                  <IconStar size={16} color="#DFC5FE" />
-                </Group>
               </Stack>
             </Card>
 
@@ -272,88 +209,21 @@ export default function Home() {
             >
               <Stack gap="md">
                 <Center>
-                  <IconCoffee size={40} color="#B28BC2" />
+                  <IconCoffee size={40} color={colors.primary} />
                 </Center>
                 <Stack gap="xs" align="center">
                   <Title order={3} size="xl" fw={400} ta="center">
-                    Pastries & Coffee
+                    Pastries
                   </Title>
                   <Text c="dimmed" ta="center" size="sm">
                     Delicate pastries paired with ethically sourced, perfectly
                     roasted coffee blends
                   </Text>
                 </Stack>
-                <Group justify="center" gap="xs">
-                  <IconStar size={16} color="#B28BC2" />
-                  <IconStar size={16} color="#B28BC2" />
-                  <IconStar size={16} color="#B28BC2" />
-                  <IconStar size={16} color="#DFC5FE" />
-                  <IconStar size={16} color="#DFC5FE" />
-                </Group>
               </Stack>
             </Card>
           </SimpleGrid>
         </Stack>
-      </Container>
-
-      {/* About Section */}
-      <Container size="xl" py={80}>
-        <SimpleGrid cols={{ base: 1, md: 2 }} spacing={80}>
-          <Stack gap="xl">
-            <Stack gap="md">
-              <Title
-                order={2}
-                size="2.5rem"
-                fw={300}
-                style={{ fontFamily: "var(--font-playfair)" }}
-              >
-                Our Story
-              </Title>
-              <Text size="lg" c="dimmed" lh={1.7}>
-                Founded in 1985, Zallè Patisserie has been a cornerstone of
-                artisanal baking, blending time-honored traditions with modern
-                innovation. Every morning, our master bakers begin their craft
-                before dawn, ensuring each creation meets our uncompromising
-                standards.
-              </Text>
-              <Text size="lg" c="dimmed" lh={1.7}>
-                We source only the finest ingredients from trusted local
-                suppliers and international partners, believing that exceptional
-                quality starts with exceptional ingredients.
-              </Text>
-            </Stack>
-            <Button
-              variant="outline"
-              color="#B28BC2"
-              size="md"
-              radius="xl"
-              w="fit-content"
-              fw={400}
-            >
-              Learn More About Us
-            </Button>
-          </Stack>
-
-          <Card
-            radius="lg"
-            p="xl"
-            bg="gray.0"
-            style={{ border: "1px solid var(--mantine-color-gray-3)" }}
-          >
-            <Stack gap="lg">
-              <Title order={3} size="xl" fw={400} c="#B28BC2">
-                Why Choose Ghazal?
-              </Title>
-              <Stack gap="md">
-                <Text fw={500}>✨ Handcrafted Excellence</Text>
-                <Text fw={500}>🌾 Premium Organic Ingredients</Text>
-                <Text fw={500}>👨‍🍳 Master Baker Expertise</Text>
-                <Text fw={500}>🏆 Award-Winning Recipes</Text>
-                <Text fw={500}>💝 Custom Orders Welcome</Text>
-              </Stack>
-            </Stack>
-          </Card>
-        </SimpleGrid>
       </Container>
 
       {/* Footer */}
@@ -365,13 +235,13 @@ export default function Home() {
               order={3}
               size="xl"
               fw={400}
-              style={{ fontFamily: "var(--font-playfair)" }}
-              c="#B28BC2"
+              style={{ fontFamily: fonts.heading }}
+              c={colors.primary}
             >
               Zallè Patisserie
             </Title>
             <Text size="sm" c="dimmed">
-              Artisan delights since 1985
+              The best
             </Text>
           </Stack>
 
@@ -381,7 +251,7 @@ export default function Home() {
                 Quick Links
               </Text>
               <Anchor c="dimmed" size="sm">
-                Shop
+                Menu
               </Anchor>
               <Anchor c="dimmed" size="sm">
                 Cart
