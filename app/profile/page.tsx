@@ -18,7 +18,6 @@ import {
   Flex,
   ActionIcon,
   Timeline,
-  NumberInput,
   Switch,
   Tabs,
 } from "@mantine/core";
@@ -28,17 +27,9 @@ import {
   IconStar,
   IconGift,
   IconCrown,
-  IconCalendar,
   IconShoppingBag,
   IconEdit,
   IconSettings,
-  IconBell,
-  IconMail,
-  IconCake,
-  IconCoffee,
-  IconBread,
-  IconMapPin,
-  IconPhone,
 } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
 import { colors, gradients, fonts } from "@/lib/theme";
@@ -201,7 +192,6 @@ export default function Profile() {
               : "none",
             color: isEarned ? "white" : "#adb5bd",
           }}
-          gi
         />
       </ThemeIcon>
     );

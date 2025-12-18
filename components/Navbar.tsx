@@ -6,7 +6,7 @@ import {
   Group,
   ActionIcon,
   Flex,
-  Anchor,
+  Text,
   Box,
 } from "@mantine/core";
 import Link from "next/link";
@@ -54,13 +54,14 @@ export function Navbar() {
                 href={item.href}
                 style={{ textDecoration: "none" }}
               >
-                <Anchor
+                <Text
                   c={pathname === item.href ? colors.primary : "dimmed"}
                   size="sm"
                   fw={pathname === item.href ? 600 : 500}
+                  style={{ cursor: "pointer" }}
                 >
                   {item.label}
-                </Anchor>
+                </Text>
               </Link>
             ))}
             <Group gap="sm">
