@@ -8,14 +8,18 @@ import {
   Flex,
   Text,
   Box,
+  Burger,
+  Drawer,
+  Stack,
 } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IconShoppingBag, IconUser } from "@tabler/icons-react";
 import { colors, fonts } from "@/lib/theme";
 
 export function Navbar() {
   const pathname = usePathname();
+  const [opened, { toggle, close }] = useDisclosure(false);
 
   const navItems = [
     { href: "/menu", label: "Menu" },
@@ -39,7 +43,7 @@ export function Navbar() {
           <Link href="/" style={{ textDecoration: "none" }}>
             <Title
               order={1}
-              size="2rem"
+              size="1.5rem"
               fw={400}
               style={{ fontFamily: fonts.heading }}
               c={colors.primary}
@@ -47,7 +51,9 @@ export function Navbar() {
               Zallè Patisserie
             </Title>
           </Link>
-          <Group gap="xl">
+
+          {/* Desktop Navigation */}
+          <Group gap="xl" visibleFrom="sm">
             {navItems.map((item) => (
               <Link
                 key={item.href}
@@ -64,23 +70,60 @@ export function Navbar() {
                 </Text>
               </Link>
             ))}
-            <Group gap="sm">
-              <ActionIcon variant="subtle" color="gray" size="lg">
-                <IconShoppingBag size={20} />
-              </ActionIcon>
-              <Link href="/profile" style={{ textDecoration: "none" }}>
-                <ActionIcon
-                  variant="subtle"
-                  color={pathname === "/profile" ? colors.primary : "gray"}
-                  size="lg"
-                >
-                  <IconUser size={20} />
-                </ActionIcon>
-              </Link>
-            </Group>
           </Group>
+
+          {/* Mobile Burger */}
+          <Burger
+            opened={opened}
+            onClick={toggle}
+            hiddenFrom="sm"
+            size="sm"
+            color={colors.primary}
+          />
         </Flex>
       </Container>
+
+      {/* Mobile Drawer */}
+      <Drawer
+        opened={opened}
+        onClose={close}
+        position="right"
+        size="xs"
+        title={
+          <Title
+            order={2}
+            size="1.25rem"
+            fw={400}
+            style={{ fontFamily: fonts.heading }}
+            c={colors.primary}
+          >
+            Zallè Patisserie
+          </Title>
+        }
+        styles={{
+          body: { paddingTop: 20 },
+        }}
+      >
+        <Stack gap="lg">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              style={{ textDecoration: "none" }}
+              onClick={close}
+            >
+              <Text
+                c={pathname === item.href ? colors.primary : "dimmed"}
+                size="lg"
+                fw={pathname === item.href ? 600 : 500}
+                style={{ cursor: "pointer" }}
+              >
+                {item.label}
+              </Text>
+            </Link>
+          ))}
+        </Stack>
+      </Drawer>
     </Box>
   );
 }

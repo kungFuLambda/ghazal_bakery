@@ -31,7 +31,7 @@ import {
   IconChefHat,
   IconSchool,
 } from "@tabler/icons-react";
-import { colors, gradients, fonts, getGradientCSS } from "@/lib/theme";
+import { colors, fonts } from "@/lib/theme";
 
 export default function About() {
   return (
@@ -40,8 +40,8 @@ export default function About() {
       <Navbar />
 
       {/* Hero Section */}
-      <Container size="xl" py={80}>
-        <Stack align="center" gap={50}>
+      <Container size="xl" py={{ base: 40, md: 80 }}>
+        <Stack align="center" gap={{ base: 30, md: 50 }}>
           <Stack align="center" gap="lg">
             <Badge
               variant="outline"
@@ -54,7 +54,7 @@ export default function About() {
             </Badge>
             <Title
               order={1}
-              size="3.5rem"
+              fz={{ base: "2rem", sm: "2.5rem", md: "3.5rem" }}
               ta="center"
               fw={300}
               style={{
@@ -64,13 +64,7 @@ export default function About() {
               }}
             >
               Ghazal Haddad
-              <Text
-                component="span"
-                inherit
-                variant="gradient"
-                gradient={gradients.primary}
-                fw={400}
-              >
+              <Text component="span" inherit c={colors.primary} fw={400}>
                 {" "}
                 Artisan & Visionary
               </Text>
@@ -328,7 +322,7 @@ export default function About() {
         <Box
           p="xl"
           style={{
-            background: getGradientCSS(),
+            background: colors.primary,
             borderRadius: "var(--mantine-radius-lg)",
           }}
         >
@@ -378,9 +372,57 @@ export default function About() {
       </Container>
 
       {/* Footer */}
-      <Container size="xl" py={50}>
+      <Container size="xl" py={{ base: 30, md: 50 }}>
         <Divider my="xl" color="gray.4" />
-        <Group justify="space-between" align="flex-start">
+        <Stack gap="xl" hiddenFrom="sm">
+          <Stack gap="sm" align="center">
+            <Title
+              order={3}
+              size="xl"
+              fw={400}
+              style={{ fontFamily: fonts.heading }}
+              c={colors.primary}
+            >
+              Zallè Patisserie
+            </Title>
+            <Text size="sm" c="dimmed">
+              Artisan delights since 1985
+            </Text>
+          </Stack>
+          <Group justify="center" gap="xl">
+            <Stack gap="xs" align="center">
+              <Text fw={500} size="sm">
+                Quick Links
+              </Text>
+              <Anchor href="/menu" c="dimmed" size="sm">
+                Menu
+              </Anchor>
+              <Anchor href="/about" c="dimmed" size="sm">
+                About
+              </Anchor>
+              <Anchor href="/contact" c="dimmed" size="sm">
+                Contact
+              </Anchor>
+            </Stack>
+            <Stack gap="xs" align="center">
+              <Text fw={500} size="sm">
+                Contact
+              </Text>
+              <Anchor
+                href="https://instagram.com/zallepastry"
+                target="_blank"
+                c="dimmed"
+                size="sm"
+              >
+                @zallepastry
+              </Anchor>
+              <Text c="dimmed" size="sm">
+                +962 79 333 7446
+              </Text>
+            </Stack>
+          </Group>
+        </Stack>
+        <Group justify="space-between" align="flex-start" visibleFrom="sm">
           <Stack gap="sm">
             <Title
               order={3}
@@ -401,8 +443,8 @@ export default function About() {
               <Text fw={500} size="sm">
                 Quick Links
               </Text>
-              <Anchor href="/shop" c="dimmed" size="sm">
-                Shop
+              <Anchor href="/menu" c="dimmed" size="sm">
+                Menu
               </Anchor>
               <Anchor href="/about" c="dimmed" size="sm">
                 About
@@ -415,11 +457,16 @@ export default function About() {
               <Text fw={500} size="sm">
                 Contact
               </Text>
+              <Anchor
+                href="https://instagram.com/zallepastry"
+                target="_blank"
+                c="dimmed"
+                size="sm"
+              >
+                @zallepastry
+              </Anchor>
               <Text c="dimmed" size="sm">
-                123 Baker Street
-              </Text>
-              <Text c="dimmed" size="sm">
-                (555) 123-4567
+                +962 79 333 7446
               </Text>
             </Stack>
           </Group>

@@ -32,7 +32,7 @@ import {
   IconSettings,
 } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
-import { colors, gradients, fonts } from "@/lib/theme";
+import { colors, fonts } from "@/lib/theme";
 
 interface StampCard {
   currentStamps: number;
@@ -165,9 +165,8 @@ export default function Profile() {
         key={index}
         size={50}
         radius="xl"
-        variant={isEarned ? "gradient" : "light"}
-        gradient={isEarned ? gradients.primary : undefined}
-        color={isEarned ? undefined : "gray"}
+        variant={isEarned ? "filled" : "light"}
+        color={isEarned ? colors.primary : "gray"}
         style={{
           cursor: "pointer",
           transition: "all 0.3s ease",
@@ -179,7 +178,7 @@ export default function Profile() {
             ? `2px solid ${colors.primary}50`
             : "2px solid #e9ecef",
           background: isEarned
-            ? gradients.primaryCSS
+            ? colors.primary
             : "linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)",
         }}
         onClick={addStamp}
@@ -209,8 +208,8 @@ export default function Profile() {
               <Avatar
                 size={100}
                 radius="xl"
-                variant="gradient"
-                gradient={gradients.primary}
+                variant="filled"
+                color={colors.primary}
               >
                 <IconUser size={40} />
               </Avatar>
@@ -330,8 +329,8 @@ export default function Profile() {
                     <ThemeIcon
                       size={48}
                       radius="xl"
-                      variant="gradient"
-                      gradient={gradients.primary}
+                      variant="filled"
+                      color={colors.primary}
                       style={{
                         boxShadow: `0 4px 20px ${colors.primary}30`,
                       }}
@@ -449,9 +448,9 @@ export default function Profile() {
                     </Card>
                   ) : (
                     <Button
-                      variant="gradient"
-                      gradient={gradients.primary}
-                      c="white"
+                      variant="filled"
+                      color={colors.primary}
+                      c="dark"
                       size="lg"
                       leftSection={<IconStar size={20} />}
                       onClick={addStamp}

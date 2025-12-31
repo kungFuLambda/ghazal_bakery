@@ -20,7 +20,7 @@ import { Carousel } from "@mantine/carousel";
 import "@mantine/carousel/styles.css";
 import { Navbar } from "@/components/Navbar";
 import { IconCake, IconCoffee, IconBread } from "@tabler/icons-react";
-import { colors, gradients, fonts } from "@/lib/theme";
+import { colors, fonts } from "@/lib/theme";
 
 export default function Home() {
   return (
@@ -52,7 +52,7 @@ export default function Home() {
             <Image
               src="/images/glaze2.jpg"
               alt="Artisan Bakery Interior"
-              height={400}
+              h={{ base: 250, sm: 350, md: 400 }}
               fit="cover"
               radius={0}
             />
@@ -61,7 +61,7 @@ export default function Home() {
             <Image
               src="/images/croissant.jpg"
               alt="Fresh Baked Goods"
-              height={400}
+              h={{ base: 250, sm: 350, md: 400 }}
               fit="cover"
               radius={0}
             />
@@ -70,7 +70,7 @@ export default function Home() {
             <Image
               src="/images/croissant.jpg"
               alt="Master Baker at Work"
-              height={400}
+              h={{ base: 250, sm: 350, md: 400 }}
               fit="cover"
               radius={0}
             />
@@ -79,8 +79,8 @@ export default function Home() {
       </Box>
 
       {/* Hero Section */}
-      <Container size="xl" py={100}>
-        <Stack align="center" gap={50}>
+      <Container size="xl" py={{ base: 40, sm: 60, md: 100 }}>
+        <Stack align="center" gap="xl">
           <Stack align="center" gap="lg">
             <Badge
               variant="outline"
@@ -93,9 +93,9 @@ export default function Home() {
             </Badge>
             <Title
               order={1}
-              size="4rem"
               ta="center"
               fw={300}
+              fz={{ base: "2rem", sm: "3rem", md: "4rem" }}
               style={{
                 fontFamily: fonts.heading,
                 lineHeight: 1.2,
@@ -103,13 +103,7 @@ export default function Home() {
               }}
             >
               Where Every Bite Tells a Story of
-              <Text
-                component="span"
-                inherit
-                variant="gradient"
-                gradient={gradients.primary}
-                fw={400}
-              >
+              <Text component="span" inherit c={colors.primary} fw={400}>
                 {" "}
                 Perfection
               </Text>
@@ -124,9 +118,9 @@ export default function Home() {
             <Button
               size="lg"
               radius="xl"
-              variant="gradient"
-              gradient={gradients.primary}
-              c="white"
+              variant="filled"
+              color={colors.primary}
+              c="dark"
               fw={500}
               px={40}
             >
@@ -137,13 +131,13 @@ export default function Home() {
       </Container>
 
       {/* Featured Products */}
-      <Container size="xl" py={80}>
-        <Stack gap={50}>
+      <Container size="xl" py={{ base: 40, md: 80 }}>
+        <Stack gap="xl">
           <Center>
             <Stack align="center" gap="md">
               <Title
                 order={2}
-                size="2.5rem"
+                fz={{ base: "1.75rem", sm: "2rem", md: "2.5rem" }}
                 fw={300}
                 style={{ fontFamily: fonts.heading }}
               >
@@ -227,9 +221,57 @@ export default function Home() {
       </Container>
 
       {/* Footer */}
-      <Container size="xl" py={50}>
+      <Container size="xl" py={{ base: 30, md: 50 }}>
         <Divider my="xl" color="gray.4" />
-        <Group justify="space-between" align="flex-start">
+        <Stack gap="xl" hiddenFrom="sm">
+          <Stack gap="sm" align="center">
+            <Title
+              order={3}
+              size="xl"
+              fw={400}
+              style={{ fontFamily: fonts.heading }}
+              c={colors.primary}
+            >
+              Zallè Patisserie
+            </Title>
+            <Text size="sm" c="dimmed">
+              The best
+            </Text>
+          </Stack>
+          <Group justify="center" gap="xl">
+            <Stack gap="xs" align="center">
+              <Text fw={500} size="sm">
+                Quick Links
+              </Text>
+              <Anchor href="/menu" c="dimmed" size="sm">
+                Menu
+              </Anchor>
+              <Anchor href="/about" c="dimmed" size="sm">
+                About
+              </Anchor>
+              <Anchor href="/contact" c="dimmed" size="sm">
+                Contact
+              </Anchor>
+            </Stack>
+            <Stack gap="xs" align="center">
+              <Text fw={500} size="sm">
+                Contact
+              </Text>
+              <Anchor
+                href="https://instagram.com/zallepastry"
+                target="_blank"
+                c="dimmed"
+                size="sm"
+              >
+                @zallepastry
+              </Anchor>
+              <Text c="dimmed" size="sm">
+                +962 79 333 7446
+              </Text>
+            </Stack>
+          </Group>
+        </Stack>
+        <Group justify="space-between" align="flex-start" visibleFrom="sm">
           <Stack gap="sm">
             <Title
               order={3}
@@ -250,25 +292,30 @@ export default function Home() {
               <Text fw={500} size="sm">
                 Quick Links
               </Text>
-              <Anchor c="dimmed" size="sm">
+              <Anchor href="/menu" c="dimmed" size="sm">
                 Menu
               </Anchor>
-              <Anchor c="dimmed" size="sm">
-                Cart
+              <Anchor href="/about" c="dimmed" size="sm">
+                About
               </Anchor>
-              <Anchor c="dimmed" size="sm">
-                Account
+              <Anchor href="/contact" c="dimmed" size="sm">
+                Contact
               </Anchor>
             </Stack>
             <Stack gap="xs">
               <Text fw={500} size="sm">
                 Contact
               </Text>
+              <Anchor
+                href="https://instagram.com/zallepastry"
+                target="_blank"
+                c="dimmed"
+                size="sm"
+              >
+                @zallepastry
+              </Anchor>
               <Text c="dimmed" size="sm">
-                123 Baker Street
-              </Text>
-              <Text c="dimmed" size="sm">
-                (555) 123-4567
+                +962 79 333 7446
               </Text>
             </Stack>
           </Group>

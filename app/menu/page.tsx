@@ -4,7 +4,6 @@ import {
   Container,
   Title,
   Text,
-  Button,
   Group,
   Stack,
   Card,
@@ -14,115 +13,20 @@ import {
   Anchor,
   Divider,
   Center,
-  ActionIcon,
-  Flex,
   Image,
 } from "@mantine/core";
 import { Navbar } from "@/components/Navbar";
-import {
-  IconShoppingBag,
-  IconUser,
-  IconPlus,
-  IconMinus,
-  IconShoppingCart,
-} from "@tabler/icons-react";
-import { useState } from "react";
-import { colors, gradients, fonts } from "@/lib/theme";
-
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  category: string;
-}
-
-const products: Product[] = [
-  {
-    id: 1,
-    name: "Chocolate Croissant",
-    description: "Buttery croissant filled with premium Belgian chocolate",
-    price: 4.5,
-    image: "/images/croissant.jpg",
-    category: "Pastries",
-  },
-  {
-    id: 2,
-    name: "Glazed Donut",
-    description: "Fresh glazed donut with our signature glaze",
-    price: 3.25,
-    image: "/images/glaze.jpg",
-    category: "Donuts",
-  },
-  {
-    id: 3,
-    name: "Artisan Sourdough",
-    description: "Handcrafted sourdough bread with crispy crust",
-    price: 8.0,
-    image: "/images/glaze2.jpg",
-    category: "Breads",
-  },
-  {
-    id: 4,
-    name: "Almond Croissant",
-    description: "Flaky croissant filled with sweet almond cream",
-    price: 5.0,
-    image: "/images/croissant.jpg",
-    category: "Pastries",
-  },
-  {
-    id: 5,
-    name: "Chocolate Éclair",
-    description: "Classic French éclair with chocolate glaze",
-    price: 4.75,
-    image: "/images/glaze.jpg",
-    category: "Pastries",
-  },
-  {
-    id: 6,
-    name: "Cinnamon Roll",
-    description: "Warm cinnamon roll with cream cheese frosting",
-    price: 3.75,
-    image: "/images/glaze2.jpg",
-    category: "Pastries",
-  },
-];
+import { colors, fonts } from "@/lib/theme";
+import { products } from "./menu";
 
 export default function Shop() {
-  const [cart, setCart] = useState<{ [key: number]: number }>({});
-
-  const addToCart = (productId: number, quantity: number = 1) => {
-    setCart((prev) => ({
-      ...prev,
-      [productId]: (prev[productId] || 0) + quantity,
-    }));
-  };
-
-  const updateQuantity = (productId: number, quantity: number) => {
-    if (quantity <= 0) {
-      const newCart = { ...cart };
-      delete newCart[productId];
-      setCart(newCart);
-    } else {
-      setCart((prev) => ({
-        ...prev,
-        [productId]: quantity,
-      }));
-    }
-  };
-
-  const getTotalItems = () => {
-    return Object.values(cart).reduce((sum, quantity) => sum + quantity, 0);
-  };
-
   return (
     <Box>
       {/* Navigation Header */}
       <Navbar />
 
       {/* Page Header */}
-      <Container size="xl" py={60}>
+      <Container size="xl" py={{ base: 40, md: 60 }}>
         <Stack align="center" gap="lg">
           <Badge
             variant="outline"
@@ -135,7 +39,7 @@ export default function Shop() {
           </Badge>
           <Title
             order={1}
-            size="3rem"
+            fz={{ base: "2rem", sm: "2.5rem", md: "3rem" }}
             ta="center"
             fw={300}
             style={{ fontFamily: fonts.heading }}
@@ -158,14 +62,28 @@ export default function Shop() {
               radius="lg"
               p={0}
               bg="gray.0"
+              component="a"
+              href={`/menu/${product.id}`}
               style={{
                 border: "1px solid var(--mantine-color-gray-3)",
                 overflow: "hidden",
+                cursor: "pointer",
+                transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                textDecoration: "none",
+              }}
+              onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                e.currentTarget.style.transform = "translateY(-4px)";
+                e.currentTarget.style.boxShadow =
+                  "0 8px 24px rgba(0,0,0,0.12)";
+              }}
+              onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
               }}
             >
               <Stack gap={0}>
                 <Image
-                  src={product.image}
+                  src={product.images[0]}
                   alt={product.name}
                   height={200}
                   fit="cover"
@@ -197,59 +115,6 @@ export default function Shop() {
                       {product.description}
                     </Text>
                   </Stack>
-
-                  {cart[product.id] ? (
-                    <Group justify="space-between" align="center">
-                      <Group gap="xs">
-                        <ActionIcon
-                          variant="outline"
-                          color={colors.primary}
-                          size="sm"
-                          onClick={() =>
-                            updateQuantity(product.id, cart[product.id] - 1)
-                          }
-                        >
-                          <IconMinus size={16} />
-                        </ActionIcon>
-                        <Text
-                          fw={500}
-                          size="sm"
-                          style={{ minWidth: "20px", textAlign: "center" }}
-                        >
-                          {cart[product.id]}
-                        </Text>
-                        <ActionIcon
-                          variant="outline"
-                          color={colors.primary}
-                          size="sm"
-                          onClick={() =>
-                            updateQuantity(product.id, cart[product.id] + 1)
-                          }
-                        >
-                          <IconPlus size={16} />
-                        </ActionIcon>
-                      </Group>
-                      <Button
-                        variant="light"
-                        color={colors.primary}
-                        size="sm"
-                        leftSection={<IconShoppingCart size={16} />}
-                      >
-                        In Cart
-                      </Button>
-                    </Group>
-                  ) : (
-                    <Button
-                      variant="gradient"
-                      gradient={gradients.primary}
-                      c="white"
-                      fw={500}
-                      leftSection={<IconShoppingCart size={16} />}
-                      onClick={() => addToCart(product.id)}
-                    >
-                      Add to Cart
-                    </Button>
-                  )}
                 </Stack>
               </Stack>
             </Card>
@@ -258,9 +123,57 @@ export default function Shop() {
       </Container>
 
       {/* Footer */}
-      <Container size="xl" py={50}>
+      <Container size="xl" py={{ base: 30, md: 50 }}>
         <Divider my="xl" color="gray.4" />
-        <Group justify="space-between" align="flex-start">
+        <Stack gap="xl" hiddenFrom="sm">
+          <Stack gap="sm" align="center">
+            <Title
+              order={3}
+              size="xl"
+              fw={400}
+              style={{ fontFamily: fonts.heading }}
+              c={colors.primary}
+            >
+              Zallè Patisserie
+            </Title>
+            <Text size="sm" c="dimmed">
+              Artisan delights since 1985
+            </Text>
+          </Stack>
+          <Group justify="center" gap="xl">
+            <Stack gap="xs" align="center">
+              <Text fw={500} size="sm">
+                Quick Links
+              </Text>
+              <Anchor href="/menu" c="dimmed" size="sm">
+                Menu
+              </Anchor>
+              <Anchor href="/about" c="dimmed" size="sm">
+                About
+              </Anchor>
+              <Anchor href="/contact" c="dimmed" size="sm">
+                Contact
+              </Anchor>
+            </Stack>
+            <Stack gap="xs" align="center">
+              <Text fw={500} size="sm">
+                Contact
+              </Text>
+              <Anchor
+                href="https://instagram.com/zallepastry"
+                target="_blank"
+                c="dimmed"
+                size="sm"
+              >
+                @zallepastry
+              </Anchor>
+              <Text c="dimmed" size="sm">
+                +962 79 333 7446
+              </Text>
+            </Stack>
+          </Group>
+        </Stack>
+        <Group justify="space-between" align="flex-start" visibleFrom="sm">
           <Stack gap="sm">
             <Title
               order={3}
@@ -281,8 +194,8 @@ export default function Shop() {
               <Text fw={500} size="sm">
                 Quick Links
               </Text>
-              <Anchor href="/shop" c="dimmed" size="sm">
-                Shop
+              <Anchor href="/menu" c="dimmed" size="sm">
+                Menu
               </Anchor>
               <Anchor href="/about" c="dimmed" size="sm">
                 About
@@ -295,11 +208,16 @@ export default function Shop() {
               <Text fw={500} size="sm">
                 Contact
               </Text>
+              <Anchor
+                href="https://instagram.com/zallepastry"
+                target="_blank"
+                c="dimmed"
+                size="sm"
+              >
+                @zallepastry
+              </Anchor>
               <Text c="dimmed" size="sm">
-                123 Baker Street
-              </Text>
-              <Text c="dimmed" size="sm">
-                (555) 123-4567
+                +962 79 333 7446
               </Text>
             </Stack>
           </Group>

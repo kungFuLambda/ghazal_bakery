@@ -26,13 +26,13 @@ import {
   IconShoppingBag,
   IconUser,
   IconPhone,
-  IconMail,
+  IconBrandInstagram,
   IconMapPin,
   IconClock,
   IconSend,
 } from "@tabler/icons-react";
 import { useState } from "react";
-import { colors, gradients, fonts } from "@/lib/theme";
+import { colors, fonts } from "@/lib/theme";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -65,7 +65,7 @@ export default function Contact() {
       <Navbar />
 
       {/* Page Header */}
-      <Container size="xl" py={60}>
+      <Container size="xl" py={{ base: 40, md: 60 }}>
         <Stack align="center" gap="lg">
           <Badge
             variant="outline"
@@ -78,7 +78,7 @@ export default function Contact() {
           </Badge>
           <Title
             order={1}
-            size="3rem"
+            fz={{ base: "2rem", sm: "2.5rem", md: "3rem" }}
             ta="center"
             fw={300}
             style={{ fontFamily: fonts.heading }}
@@ -129,7 +129,7 @@ export default function Contact() {
                     <Text fw={500} size="lg">
                       Phone
                     </Text>
-                    <Text c="dimmed">(555) 123-4567</Text>
+                    <Text c="dimmed">+962 79 333 7446</Text>
                     <Text c="dimmed" size="sm">
                       Call us for orders & inquiries
                     </Text>
@@ -150,15 +150,21 @@ export default function Contact() {
                     color={colors.primary}
                     variant="light"
                   >
-                    <IconMail size={24} />
+                    <IconBrandInstagram size={24} />
                   </ThemeIcon>
                   <div>
                     <Text fw={500} size="lg">
-                      Email
+                      Instagram
                     </Text>
-                    <Text c="dimmed">hello@zallepatisserie.com</Text>
+                    <Anchor
+                      href="https://instagram.com/zallepastry"
+                      target="_blank"
+                      c="dimmed"
+                    >
+                      @zallepastry
+                    </Anchor>
                     <Text c="dimmed" size="sm">
-                      We'll respond within 24 hours
+                      Follow us for updates & inspiration
                     </Text>
                   </div>
                 </Group>
@@ -333,9 +339,9 @@ export default function Contact() {
                     type="submit"
                     size="lg"
                     radius="xl"
-                    variant="gradient"
-                    gradient={gradients.primary}
-                    c="white"
+                    variant="filled"
+                    color={colors.primary}
+                    c="dark"
                     fw={500}
                     leftSection={<IconSend size={20} />}
                     fullWidth
@@ -350,9 +356,57 @@ export default function Contact() {
       </Container>
 
       {/* Footer */}
-      <Container size="xl" py={50}>
+      <Container size="xl" py={{ base: 30, md: 50 }}>
         <Divider my="xl" color="gray.4" />
-        <Group justify="space-between" align="flex-start">
+        <Stack gap="xl" hiddenFrom="sm">
+          <Stack gap="sm" align="center">
+            <Title
+              order={3}
+              size="xl"
+              fw={400}
+              style={{ fontFamily: fonts.heading }}
+              c={colors.primary}
+            >
+              Zallè Patisserie
+            </Title>
+            <Text size="sm" c="dimmed">
+              Artisan delights since 1985
+            </Text>
+          </Stack>
+          <Group justify="center" gap="xl">
+            <Stack gap="xs" align="center">
+              <Text fw={500} size="sm">
+                Quick Links
+              </Text>
+              <Anchor href="/menu" c="dimmed" size="sm">
+                Menu
+              </Anchor>
+              <Anchor href="/about" c="dimmed" size="sm">
+                About
+              </Anchor>
+              <Anchor href="/contact" c="dimmed" size="sm">
+                Contact
+              </Anchor>
+            </Stack>
+            <Stack gap="xs" align="center">
+              <Text fw={500} size="sm">
+                Contact
+              </Text>
+              <Anchor
+                href="https://instagram.com/zallepastry"
+                target="_blank"
+                c="dimmed"
+                size="sm"
+              >
+                @zallepastry
+              </Anchor>
+              <Text c="dimmed" size="sm">
+                +962 79 333 7446
+              </Text>
+            </Stack>
+          </Group>
+        </Stack>
+        <Group justify="space-between" align="flex-start" visibleFrom="sm">
           <Stack gap="sm">
             <Title
               order={3}
@@ -373,8 +427,8 @@ export default function Contact() {
               <Text fw={500} size="sm">
                 Quick Links
               </Text>
-              <Anchor href="/shop" c="dimmed" size="sm">
-                Shop
+              <Anchor href="/menu" c="dimmed" size="sm">
+                Menu
               </Anchor>
               <Anchor href="/about" c="dimmed" size="sm">
                 About
@@ -387,11 +441,16 @@ export default function Contact() {
               <Text fw={500} size="sm">
                 Contact
               </Text>
+              <Anchor
+                href="https://instagram.com/zallepastry"
+                target="_blank"
+                c="dimmed"
+                size="sm"
+              >
+                @zallepastry
+              </Anchor>
               <Text c="dimmed" size="sm">
-                123 Baker Street
-              </Text>
-              <Text c="dimmed" size="sm">
-                (555) 123-4567
+                +962 79 333 7446
               </Text>
             </Stack>
           </Group>

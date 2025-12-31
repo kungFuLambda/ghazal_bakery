@@ -4,14 +4,14 @@
 export const theme = {
   colors: {
     // Primary brand color - change this to update the main theme color
-    primary: "#B28BC2",
+    primary: "#D6C6E9",
 
-    // Secondary brand color - lighter version for gradients
-    secondary: "#DFC5FE",
+    // Secondary brand color - same as primary (no gradients)
+    secondary: "#D6C6E9",
 
     // Derived colors for consistency
     get primaryLight() {
-      return this.secondary;
+      return this.primary;
     },
 
     get primaryDark() {
@@ -20,18 +20,18 @@ export const theme = {
   },
 
   gradients: {
-    // Primary gradient used throughout the site
+    // Primary gradient - now solid color (no gradients)
     get primary() {
       return {
         from: theme.colors.primary,
-        to: theme.colors.secondary,
+        to: theme.colors.primary,
         deg: 45,
       };
     },
 
-    // CSS gradient string for inline styles
+    // CSS background string for inline styles (solid color)
     get primaryCSS() {
-      return `linear-gradient(45deg, ${theme.colors.primary}, ${theme.colors.secondary})`;
+      return theme.colors.primary;
     },
   },
 
