@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "@mantine/core/styles.css";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -34,6 +35,7 @@ export default function RootLayout({
       </head>
       <body className={`${playfair.variable} ${inter.variable} antialiased`}>
         <MantineProvider>{children}</MantineProvider>
+        <Analytics />
       </body>
     </html>
   );
