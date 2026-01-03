@@ -23,7 +23,6 @@ export function Navbar() {
 
   const navItems = [
     { href: "/menu", label: "Menu" },
-    { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
 
@@ -32,10 +31,12 @@ export function Navbar() {
       pos="sticky"
       top={0}
       style={{
-        backgroundColor: "white",
+        backgroundColor: "rgba(255, 255, 255, 0.8)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
         zIndex: 100,
-        borderBottom: "1px solid #e9ecef",
-        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+        borderBottom: "1px solid rgba(255, 255, 255, 0.3)",
+        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.05)",
       }}
     >
       <Container size="xl" py="md">
@@ -53,7 +54,7 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <Group gap="xl" visibleFrom="sm">
+          <Group gap="lg" visibleFrom="sm">
             {navItems.map((item) => (
               <Link
                 key={item.href}
@@ -61,10 +62,18 @@ export function Navbar() {
                 style={{ textDecoration: "none" }}
               >
                 <Text
-                  c={pathname === item.href ? colors.primary : "dimmed"}
+                  c={pathname === item.href ? "dark.8" : "dark.4"}
                   size="sm"
-                  fw={pathname === item.href ? 600 : 500}
-                  style={{ cursor: "pointer" }}
+                  fw={500}
+                  px="md"
+                  py="xs"
+                  style={{
+                    cursor: "pointer",
+                    borderRadius: "20px",
+                    backgroundColor:
+                      pathname === item.href ? colors.primary : "transparent",
+                    transition: "all 0.2s ease",
+                  }}
                 >
                   {item.label}
                 </Text>
@@ -90,15 +99,14 @@ export function Navbar() {
         position="right"
         size="xs"
         title={
-          <Title
-            order={2}
+          <Text
             size="1.25rem"
             fw={400}
             style={{ fontFamily: fonts.heading }}
             c={colors.primary}
           >
             Zallè Patisserie
-          </Title>
+          </Text>
         }
         styles={{
           body: { paddingTop: 20 },

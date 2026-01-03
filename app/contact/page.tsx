@@ -14,8 +14,6 @@ import {
   Anchor,
   Divider,
   Center,
-  ActionIcon,
-  Flex,
   TextInput,
   Textarea,
   Select,
@@ -23,11 +21,8 @@ import {
 } from "@mantine/core";
 import { Navbar } from "@/components/Navbar";
 import {
-  IconShoppingBag,
-  IconUser,
   IconPhone,
   IconBrandInstagram,
-  IconMapPin,
   IconClock,
   IconSend,
 } from "@tabler/icons-react";
@@ -189,8 +184,9 @@ export default function Contact() {
                     <Text fw={500} size="lg">
                       Hours
                     </Text>
-                    <Text c="dimmed">Monday - Saturday: 7:00 AM - 8:00 PM</Text>
-                    <Text c="dimmed">Sunday: 8:00 AM - 6:00 PM</Text>
+                    <Text c="dimmed">
+                      Saturday - Thursday: 9:00 AM - 6:00 PM
+                    </Text>
                   </div>
                 </Group>
               </Card>

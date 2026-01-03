@@ -6,7 +6,6 @@ import {
   Text,
   Group,
   Stack,
-  Badge,
   Box,
   Anchor,
   Divider,
@@ -14,13 +13,18 @@ import {
   Image,
   Button,
   Card,
+  ActionIcon,
 } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
 import "@mantine/carousel/styles.css";
 import { Navbar } from "@/components/Navbar";
-import { IconBrandInstagram, IconPhone, IconArrowLeft } from "@tabler/icons-react";
+import {
+  IconBrandInstagram,
+  IconBrandWhatsapp,
+  IconArrowLeft,
+} from "@tabler/icons-react";
 import { colors, fonts } from "@/lib/theme";
-import { products, getProductById } from "../menu";
+import { getProductById } from "../menu";
 import { useParams, useRouter } from "next/navigation";
 import { notFound } from "next/navigation";
 
@@ -30,6 +34,11 @@ export default function ProductDetail() {
   const productId = Number(params.id);
 
   const product = getProductById(productId);
+
+  const whatsappNumber = "+962793337446";
+  const whatsappLink = `https://wa.me/${whatsappNumber.replace(/\s/g, "")}`;
+  const instagramHandle = "zallepastry";
+  const instagramLink = `https://instagram.com/${instagramHandle}`;
 
   if (!product) {
     notFound();
@@ -62,7 +71,7 @@ export default function ProductDetail() {
             p={0}
             style={{
               overflow: "hidden",
-              border: "1px solid var(--mantine-color-gray-3)",
+              border: "1px solid #e9ecef",
             }}
           >
             <Carousel
@@ -73,7 +82,7 @@ export default function ProductDetail() {
                 },
                 control: {
                   backgroundColor: "white",
-                  border: "1px solid var(--mantine-color-gray-3)",
+                  border: "1px solid #e9ecef",
                   boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
                 },
                 indicator: {
@@ -92,7 +101,7 @@ export default function ProductDetail() {
                   <Image
                     src={image}
                     alt={`${product.name} - Image ${index + 1}`}
-                    h={{ base: 250, sm: 350, md: 400 }}
+                    h={{ base: 280, sm: 380, md: 450 }}
                     fit="cover"
                   />
                 </Carousel.Slide>
@@ -102,15 +111,10 @@ export default function ProductDetail() {
 
           {/* Product Details */}
           <Stack gap="lg">
-            <Stack gap="xs">
-              <Badge
-                variant="light"
-                color={colors.primary}
-                size="lg"
-                radius="sm"
-              >
+            <Stack gap="sm">
+              <Text size="sm" fw={500} c="dimmed" tt="uppercase" lts={0.5}>
                 {product.category}
-              </Badge>
+              </Text>
               <Title
                 order={1}
                 fz={{ base: "1.75rem", sm: "2rem", md: "2.5rem" }}
@@ -119,8 +123,8 @@ export default function ProductDetail() {
               >
                 {product.name}
               </Title>
-              <Text fz={{ base: "1.5rem", md: "2rem" }} fw={600} c={colors.primary}>
-                JOD {product.price.toFixed(2)}
+              <Text fz={{ base: "1.5rem", md: "2rem" }} fw={600} c="dark.8">
+                JOD {product.price.toFixed(0)}
               </Text>
             </Stack>
 
@@ -135,7 +139,7 @@ export default function ProductDetail() {
             p={{ base: "lg", md: "xl" }}
             bg={colors.primary}
             style={{
-              marginTop: "2rem",
+              marginTop: "1rem",
             }}
           >
             <Stack align="center" gap="lg">
@@ -143,47 +147,20 @@ export default function ProductDetail() {
                 order={2}
                 fz={{ base: "1.25rem", md: "1.5rem" }}
                 ta="center"
-                c="dark"
+                c="dark.8"
                 fw={400}
                 style={{ fontFamily: fonts.heading }}
               >
-                Interested in this item?
+                Ready to Order?
               </Title>
-              <Text c="dark" ta="center" size="md" maw={500}>
-                Contact us to place an order or ask any questions about our{" "}
+              <Text c="dark.6" ta="center" size="md" maw={500}>
+                Message us on WhatsApp or Instagram to order this{" "}
                 {product.name.toLowerCase()}.
               </Text>
-              <Stack gap="md" w="100%" maw={400} hiddenFrom="sm">
+              <Group gap="md">
                 <Button
                   component="a"
-                  href="https://instagram.com/zallepastry"
-                  target="_blank"
-                  variant="white"
-                  color="dark"
-                  size="lg"
-                  radius="xl"
-                  fullWidth
-                  leftSection={<IconBrandInstagram size={20} />}
-                >
-                  @zallepastry
-                </Button>
-                <Button
-                  component="a"
-                  href="tel:+962793337446"
-                  variant="outline"
-                  color="dark"
-                  size="lg"
-                  radius="xl"
-                  fullWidth
-                  leftSection={<IconPhone size={20} />}
-                >
-                  +962 79 333 7446
-                </Button>
-              </Stack>
-              <Group gap="md" visibleFrom="sm">
-                <Button
-                  component="a"
-                  href="https://instagram.com/zallepastry"
+                  href={instagramLink}
                   target="_blank"
                   variant="white"
                   color="dark"
@@ -191,18 +168,19 @@ export default function ProductDetail() {
                   radius="xl"
                   leftSection={<IconBrandInstagram size={20} />}
                 >
-                  @zallepastry
+                  Instagram
                 </Button>
                 <Button
                   component="a"
-                  href="tel:+962793337446"
+                  href={whatsappLink}
+                  target="_blank"
                   variant="outline"
                   color="dark"
                   size="lg"
                   radius="xl"
-                  leftSection={<IconPhone size={20} />}
+                  leftSection={<IconBrandWhatsapp size={20} />}
                 >
-                  +962 79 333 7446
+                  WhatsApp
                 </Button>
               </Group>
             </Stack>
@@ -211,28 +189,44 @@ export default function ProductDetail() {
       </Container>
 
       {/* Footer */}
-      <Container size="xl" py={{ base: 30, md: 50 }}>
-        <Divider my="xl" color="gray.4" />
-        <Stack gap="xl" hiddenFrom="sm">
-          <Stack gap="sm" align="center">
+      <Box py={{ base: 30, md: 50 }} bg="white">
+        <Container size="xl">
+          <Divider mb="xl" color="gray.3" />
+
+          {/* Mobile Footer */}
+          <Stack gap="lg" hiddenFrom="sm" align="center">
             <Title
               order={3}
-              size="xl"
+              size="lg"
               fw={400}
               style={{ fontFamily: fonts.heading }}
               c={colors.primary}
             >
               Zallè Patisserie
             </Title>
-            <Text size="sm" c="dimmed">
-              Artisan delights since 1985
-            </Text>
-          </Stack>
-          <Group justify="center" gap="xl">
-            <Stack gap="xs" align="center">
-              <Text fw={500} size="sm">
-                Quick Links
-              </Text>
+            <Group gap="lg">
+              <ActionIcon
+                component="a"
+                href={instagramLink}
+                target="_blank"
+                size="lg"
+                variant="subtle"
+                color="gray"
+              >
+                <IconBrandInstagram size={22} />
+              </ActionIcon>
+              <ActionIcon
+                component="a"
+                href={whatsappLink}
+                target="_blank"
+                size="lg"
+                variant="subtle"
+                color="gray"
+              >
+                <IconBrandWhatsapp size={22} />
+              </ActionIcon>
+            </Group>
+            <Group gap="md">
               <Anchor href="/menu" c="dimmed" size="sm">
                 Menu
               </Anchor>
@@ -242,46 +236,22 @@ export default function ProductDetail() {
               <Anchor href="/contact" c="dimmed" size="sm">
                 Contact
               </Anchor>
-            </Stack>
-            <Stack gap="xs" align="center">
-              <Text fw={500} size="sm">
-                Contact
-              </Text>
-              <Anchor
-                href="https://instagram.com/zallepastry"
-                target="_blank"
-                c="dimmed"
-                size="sm"
-              >
-                @zallepastry
-              </Anchor>
-              <Text c="dimmed" size="sm">
-                +962 79 333 7446
-              </Text>
-            </Stack>
-          </Group>
-        </Stack>
-        <Group justify="space-between" align="flex-start" visibleFrom="sm">
-          <Stack gap="sm">
+            </Group>
+          </Stack>
+
+          {/* Desktop Footer */}
+          <Group justify="space-between" align="center" visibleFrom="sm">
             <Title
               order={3}
-              size="xl"
+              size="lg"
               fw={400}
               style={{ fontFamily: fonts.heading }}
               c={colors.primary}
             >
               Zallè Patisserie
             </Title>
-            <Text size="sm" c="dimmed">
-              Artisan delights since 1985
-            </Text>
-          </Stack>
 
-          <Group gap="xl">
-            <Stack gap="xs">
-              <Text fw={500} size="sm">
-                Quick Links
-              </Text>
+            <Group gap="xl">
               <Anchor href="/menu" c="dimmed" size="sm">
                 Menu
               </Anchor>
@@ -291,33 +261,40 @@ export default function ProductDetail() {
               <Anchor href="/contact" c="dimmed" size="sm">
                 Contact
               </Anchor>
-            </Stack>
-            <Stack gap="xs">
-              <Text fw={500} size="sm">
-                Contact
-              </Text>
-              <Anchor
-                href="https://instagram.com/zallepastry"
-                target="_blank"
-                c="dimmed"
-                size="sm"
-              >
-                @zallepastry
-              </Anchor>
-              <Text c="dimmed" size="sm">
-                +962 79 333 7446
-              </Text>
-            </Stack>
-          </Group>
-        </Group>
+            </Group>
 
-        <Divider my="xl" color="gray.4" />
-        <Center>
-          <Text size="sm" c="dimmed">
-            © 2025 Zallè Patisserie. All rights reserved.
-          </Text>
-        </Center>
-      </Container>
+            <Group gap="md">
+              <ActionIcon
+                component="a"
+                href={instagramLink}
+                target="_blank"
+                size="lg"
+                variant="subtle"
+                color="gray"
+              >
+                <IconBrandInstagram size={22} />
+              </ActionIcon>
+              <ActionIcon
+                component="a"
+                href={whatsappLink}
+                target="_blank"
+                size="lg"
+                variant="subtle"
+                color="gray"
+              >
+                <IconBrandWhatsapp size={22} />
+              </ActionIcon>
+            </Group>
+          </Group>
+
+          <Divider my="xl" color="gray.3" />
+          <Center>
+            <Text size="xs" c="dimmed">
+              © 2026 Zallè Patisserie. Amman, Jordan. All rights reserved.
+            </Text>
+          </Center>
+        </Container>
+      </Box>
     </Box>
   );
 }

@@ -9,65 +9,73 @@ export interface Product {
 }
 
 export const products: Product[] = [
+  // Bite-sized cakes
   {
     id: 1,
-    name: "Chocolate Croissant",
-    description: "Buttery croissant filled with premium Belgian chocolate",
+    name: "Emerald Apple",
+    description:
+      "Apple mousse, vanilla sponge, soft caramel, creamy apple curd, on a bed of a pecan cinnamon shortcrust, topped with a smooth whipped white chocolate ganache",
     longDescription:
-      "Our signature chocolate croissant is made with imported French butter and premium Belgian chocolate. Each croissant is hand-rolled and laminated to create 81 delicate layers of flaky perfection. The rich chocolate center melts perfectly when warmed, creating an indulgent breakfast or afternoon treat.",
-    price: 4.5,
-    images: ["/images/croissant.jpg", "/images/glaze.jpg", "/images/glaze2.jpg"],
-    category: "Pastries",
+      "Apple mousse, vanilla sponge, soft caramel, creamy apple curd, on a bed of a pecan cinnamon shortcrust, topped with a smooth whipped white chocolate ganache. A perfect balance of fruity sweetness and nutty crunch.",
+    price: 3.5,
+    images: ["/images/apple.jpeg"],
+    category: "Bite-sized cakes",
   },
   {
     id: 2,
-    name: "Glazed Donut",
-    description: "Fresh glazed donut with our signature glaze",
+    name: "Island Pistachio",
+    description:
+      "Pistachio Frangipane topped with a silky pistachio ganache in a crunchy tart, topped with an exotic whipped coconut ganache & elderflowers",
     longDescription:
-      "Our classic glazed donut features a light, airy dough that's fried to golden perfection and dipped in our house-made vanilla glaze. Made fresh every morning, these donuts have a delicate crunch on the outside and a pillowy soft interior that melts in your mouth.",
-    price: 3.25,
-    images: ["/images/glaze.jpg", "/images/croissant.jpg", "/images/glaze2.jpg"],
-    category: "Donuts",
+      "Pistachio Frangipane topped with a silky pistachio ganache in a crunchy tart, topped with an exotic whipped coconut ganache & elderflowers. A tropical escape in every bite.",
+    price: 4.25,
+    images: ["/images/flower.jpeg"],
+    category: "Bite-sized cakes",
   },
   {
     id: 3,
-    name: "Artisan Sourdough",
-    description: "Handcrafted sourdough bread with crispy crust",
+    name: "Floating Raspberry",
+    description:
+      "Crunchy meringue floats topped with raspberry ganache, rich chocolate sponge, butter biscuit, white chocolate ganache, decorated with candied hazelnuts",
     longDescription:
-      "Our artisan sourdough is crafted using a 25-year-old starter, giving it a complex tangy flavor and chewy texture. The long fermentation process develops deep flavors while creating the signature open crumb structure. Perfect for sandwiches, toast, or simply enjoyed with quality butter.",
-    price: 8.0,
-    images: ["/images/glaze2.jpg", "/images/croissant.jpg", "/images/glaze.jpg"],
-    category: "Breads",
+      "Crunchy meringue floats topped with raspberry ganache, rich chocolate sponge, butter biscuit, white chocolate ganache, decorated with candied hazelnuts. A delightful combination of textures and flavors.",
+    price: 3.5,
+    images: ["/images/berries.jpeg"],
+    category: "Bite-sized cakes",
   },
   {
     id: 4,
-    name: "Almond Croissant",
-    description: "Flaky croissant filled with sweet almond cream",
+    name: "Reinvented Mango Sticky Rice",
+    description:
+      "Mango crispy sticky rice, mango cake and a luscious mango milk jam, covered with a creamy coconut mousse and coconut jelly sheet",
     longDescription:
-      "A decadent twist on the classic croissant, filled with our house-made almond frangipane cream and topped with sliced almonds. Each croissant is brushed with simple syrup and baked until the almonds are perfectly toasted. The combination of buttery layers and nutty sweetness is irresistible.",
-    price: 5.0,
-    images: ["/images/croissant.jpg", "/images/glaze2.jpg", "/images/glaze.jpg"],
-    category: "Pastries",
+      "Mango crispy sticky rice, mango cake and a luscious mango milk jam, covered with a creamy coconut mousse and coconut jelly sheet. A modern twist on the beloved Thai classic.",
+    price: 4.0,
+    images: ["/images/mango.jpeg"],
+    category: "Bite-sized cakes",
   },
+  // Cakes (For 10-12 people)
   {
     id: 5,
-    name: "Chocolate Éclair",
-    description: "Classic French éclair with chocolate glaze",
+    name: "Choco Passion Cake",
+    description:
+      "Chocolate sponge, crispy chocolate, passionfruit curd and a perfect combination of sweet and sour milk chocolate and passionfruit mousse",
     longDescription:
-      "Our chocolate éclair features a perfectly baked choux pastry filled with silky vanilla pastry cream and topped with a glossy dark chocolate ganache. Each éclair is made to order to ensure the pastry stays crisp and the filling remains fresh and creamy.",
-    price: 4.75,
-    images: ["/images/glaze.jpg", "/images/glaze2.jpg", "/images/croissant.jpg"],
-    category: "Pastries",
+      "Chocolate sponge, crispy chocolate, passionfruit curd and a perfect combination of sweet and sour milk chocolate and passionfruit mousse. Serves 10-12 people. Perfect for celebrations.",
+    price: 23.0,
+    images: ["/images/chocolate.jpeg"],
+    category: "Cakes",
   },
   {
     id: 6,
-    name: "Cinnamon Roll",
-    description: "Warm cinnamon roll with cream cheese frosting",
+    name: "Berry Bliss Cake",
+    description:
+      "A fusion of mixed berries; Vanilla sponge, raspberry crispy ganache, mixed berried marmalade and a silky strawberry mousse",
     longDescription:
-      "Our cinnamon rolls are made with a soft, enriched dough swirled with Ceylon cinnamon and brown sugar. Baked until golden and topped with a generous layer of tangy cream cheese frosting. Best enjoyed warm from the oven – we can heat one up for you!",
-    price: 3.75,
-    images: ["/images/glaze2.jpg", "/images/glaze.jpg", "/images/croissant.jpg"],
-    category: "Pastries",
+      "A fusion of mixed berries; Vanilla sponge, raspberry crispy ganache, mixed berried marmalade and a silky strawberry mousse. Serves 10-12 people. A berry lover's dream.",
+    price: 27.0,
+    images: ["/images/paint.jpeg"],
+    category: "Cakes",
   },
 ];
 

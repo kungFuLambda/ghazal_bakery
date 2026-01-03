@@ -7,242 +7,299 @@ import {
   Button,
   Group,
   Stack,
-  Card,
-  SimpleGrid,
-  Badge,
   Box,
   Anchor,
   Divider,
   Center,
-  Image,
+  SimpleGrid,
+  ActionIcon,
 } from "@mantine/core";
-import { Carousel } from "@mantine/carousel";
-import "@mantine/carousel/styles.css";
 import { Navbar } from "@/components/Navbar";
-import { IconCake, IconCoffee, IconBread } from "@tabler/icons-react";
+import { ImageSlider } from "@/components/ImageSlider";
+import {
+  IconBrandInstagram,
+  IconBrandWhatsapp,
+  IconMapPin,
+} from "@tabler/icons-react";
 import { colors, fonts } from "@/lib/theme";
 
 export default function Home() {
+  const whatsappNumber = "+962793337446";
+  const whatsappLink = `https://wa.me/${whatsappNumber.replace(/\s/g, "")}`;
+  const instagramHandle = "zallepastry";
+  const instagramLink = `https://instagram.com/${instagramHandle}`;
+
   return (
     <Box>
       {/* Navigation Header */}
       <Navbar />
 
-      {/* Image Carousel */}
-      <Box>
-        <Carousel
-          withIndicators
-          slideSize="100%"
-          slideGap="md"
-          styles={{
-            indicator: {
-              width: 12,
-              height: 4,
-              transition: "width 250ms ease",
-              backgroundColor: colors.primary,
-              opacity: 0.3,
-              "&[dataActive]": {
-                opacity: 1,
-                width: 40,
-              },
-            },
-          }}
-        >
-          <Carousel.Slide>
-            <Image
-              src="/images/glaze2.jpg"
-              alt="Artisan Bakery Interior"
-              h={{ base: 250, sm: 350, md: 400 }}
-              fit="cover"
-              radius={0}
-            />
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <Image
-              src="/images/croissant.jpg"
-              alt="Fresh Baked Goods"
-              h={{ base: 250, sm: 350, md: 400 }}
-              fit="cover"
-              radius={0}
-            />
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <Image
-              src="/images/croissant.jpg"
-              alt="Master Baker at Work"
-              h={{ base: 250, sm: 350, md: 400 }}
-              fit="cover"
-              radius={0}
-            />
-          </Carousel.Slide>
-        </Carousel>
+      {/* Hero Section */}
+      <Box
+        py={{ base: 60, sm: 80, md: 120 }}
+        style={{
+          backgroundImage: "url('/marbleback.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <Container size="xl">
+          <Stack align="center" gap="xl">
+            <Stack align="center" gap="lg">
+              <Title
+                order={1}
+                ta="center"
+                fw={300}
+                fz={{ base: "2.5rem", sm: "3.5rem", md: "4.5rem" }}
+                style={{
+                  fontFamily: fonts.heading,
+                  lineHeight: 1.1,
+                  color: "#1a1a1a",
+                }}
+              >
+                Handcrafted Cakes
+                <br />
+                <Text component="span" inherit fw={400}>
+                  Made with Love
+                </Text>
+              </Title>
+              <Text
+                size="lg"
+                ta="center"
+                maw={500}
+                fw={400}
+                lh={1.7}
+                c="dark.6"
+              >
+                Artisan cakes and petit fours, crafted with passion in Amman.
+                Order online for delivery or pickup.
+              </Text>
+            </Stack>
+
+            <Group gap="md" justify="center">
+              <Button
+                component="a"
+                href={instagramLink}
+                target="_blank"
+                size="lg"
+                radius="xl"
+                variant="filled"
+                bg="dark.8"
+                c="white"
+                fw={500}
+                px={30}
+                leftSection={<IconBrandInstagram size={20} />}
+              >
+                View Our Work
+              </Button>
+              <Button
+                component="a"
+                href={whatsappLink}
+                target="_blank"
+                size="lg"
+                radius="xl"
+                variant="outline"
+                color="dark.8"
+                fw={500}
+                px={30}
+                leftSection={<IconBrandWhatsapp size={20} />}
+              >
+                Order Now
+              </Button>
+            </Group>
+          </Stack>
+        </Container>
       </Box>
 
-      {/* Hero Section */}
-      <Container size="xl" py={{ base: 40, sm: 60, md: 100 }}>
-        <Stack align="center" gap="xl">
-          <Stack align="center" gap="lg">
-            <Badge
-              variant="outline"
-              color={colors.primary}
-              size="lg"
-              radius="xl"
-              fw={400}
-            >
-              Artisan Crafted Since 1985
-            </Badge>
-            <Title
-              order={1}
-              ta="center"
-              fw={300}
-              fz={{ base: "2rem", sm: "3rem", md: "4rem" }}
-              style={{
-                fontFamily: fonts.heading,
-                lineHeight: 1.2,
-                maxWidth: "800px",
-              }}
-            >
-              Where Every Bite Tells a Story of
-              <Text component="span" inherit c={colors.primary} fw={400}>
-                {" "}
-                Perfection
-              </Text>
-            </Title>
-            <Text size="xl" c="dimmed" ta="center" maw={600} fw={300} lh={1.6}>
-              Discover the finest handcrafted pastries, and exquisite desserts
-              made with premium ingredients.
-            </Text>
-          </Stack>
+      {/* Image Slider Gallery */}
+      <ImageSlider />
 
-          <Group gap="lg">
-            <Button
-              size="lg"
-              radius="xl"
-              variant="filled"
-              color={colors.primary}
-              c="dark"
-              fw={500}
-              px={40}
-            >
-              Explore Our Creations
-            </Button>
-          </Group>
-        </Stack>
-      </Container>
-
-      {/* Featured Products */}
-      <Container size="xl" py={{ base: 40, md: 80 }}>
-        <Stack gap="xl">
-          <Center>
+      {/* Contact Section */}
+      <Box py={{ base: 60, md: 80 }} bg="gray.0">
+        <Container size="xl">
+          <Stack align="center" gap="xl">
             <Stack align="center" gap="md">
               <Title
                 order={2}
                 fz={{ base: "1.75rem", sm: "2rem", md: "2.5rem" }}
                 fw={300}
+                ta="center"
                 style={{ fontFamily: fonts.heading }}
               >
-                Signature Creations
+                Get in Touch
               </Title>
-              <Text size="lg" c="dimmed" ta="center" maw={500}>
-                Each creation is a masterpiece, meticulously crafted with
-                passion and the finest ingredients
+              <Text
+                size="lg"
+                c="dimmed"
+                ta="center"
+                maw={500}
+                fw={300}
+                lh={1.6}
+              >
+                Ready to order? Reach out through Instagram or WhatsApp and
+                let's create something sweet together.
               </Text>
             </Stack>
-          </Center>
 
-          <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="xl">
-            <Card
-              radius="lg"
-              p="xl"
-              bg="gray.0"
-              style={{ border: "1px solid var(--mantine-color-gray-3)" }}
+            {/* Contact Cards */}
+            <SimpleGrid
+              cols={{ base: 1, sm: 3 }}
+              spacing={{ base: "lg", md: "xl" }}
+              w="100%"
+              maw={800}
             >
-              <Stack gap="md">
-                <Center>
-                  <IconCake size={40} color={colors.primary} />
-                </Center>
-                <Stack gap="xs" align="center">
-                  <Title order={3} size="xl" fw={400} ta="center">
-                    Artisan Cakes
-                  </Title>
-                  <Text c="dimmed" ta="center" size="sm">
-                    Handcrafted celebration cakes made with premium Belgian
-                    chocolate and organic ingredients
+              {/* Instagram */}
+              <Stack
+                align="center"
+                gap="md"
+                p="xl"
+                style={{
+                  backgroundColor: "white",
+                  borderRadius: "16px",
+                  border: "1px solid #e9ecef",
+                }}
+              >
+                <ActionIcon
+                  size={60}
+                  radius="xl"
+                  variant="filled"
+                  bg={colors.primary}
+                  c="dark.8"
+                >
+                  <IconBrandInstagram size={30} />
+                </ActionIcon>
+                <Stack gap={4} align="center">
+                  <Text fw={500} size="md">
+                    Instagram
+                  </Text>
+                  <Anchor
+                    href={instagramLink}
+                    target="_blank"
+                    c="dimmed"
+                    size="sm"
+                    fw={400}
+                  >
+                    @{instagramHandle}
+                  </Anchor>
+                </Stack>
+              </Stack>
+
+              {/* WhatsApp */}
+              <Stack
+                align="center"
+                gap="md"
+                p="xl"
+                style={{
+                  backgroundColor: "white",
+                  borderRadius: "16px",
+                  border: "1px solid #e9ecef",
+                }}
+              >
+                <ActionIcon
+                  size={60}
+                  radius="xl"
+                  variant="filled"
+                  bg={colors.primary}
+                  c="dark.8"
+                >
+                  <IconBrandWhatsapp size={30} />
+                </ActionIcon>
+                <Stack gap={4} align="center">
+                  <Text fw={500} size="md">
+                    WhatsApp
+                  </Text>
+                  <Anchor
+                    href={whatsappLink}
+                    target="_blank"
+                    c="dimmed"
+                    size="sm"
+                    fw={400}
+                  >
+                    +962 79 333 7446
+                  </Anchor>
+                </Stack>
+              </Stack>
+
+              {/* Location */}
+              <Stack
+                align="center"
+                gap="md"
+                p="xl"
+                style={{
+                  backgroundColor: "white",
+                  borderRadius: "16px",
+                  border: "1px solid #e9ecef",
+                }}
+              >
+                <ActionIcon
+                  size={60}
+                  radius="xl"
+                  variant="filled"
+                  bg={colors.primary}
+                  c="dark.8"
+                >
+                  <IconMapPin size={30} />
+                </ActionIcon>
+                <Stack gap={4} align="center">
+                  <Text fw={500} size="md">
+                    Location
+                  </Text>
+                  <Text c="dimmed" size="sm" fw={400}>
+                    Amman, Jordan
                   </Text>
                 </Stack>
               </Stack>
-            </Card>
+            </SimpleGrid>
 
-            <Card
-              radius="lg"
-              p="xl"
-              bg="gray.0"
-              style={{ border: "1px solid var(--mantine-color-gray-3)" }}
-            >
-              <Stack gap="md">
-                <Center>
-                  <IconBread size={40} color={colors.primary} />
-                </Center>
-                <Stack gap="xs" align="center">
-                  <Title order={3} size="xl" fw={400} ta="center">
-                    Small treats
-                  </Title>
-                  <Text c="dimmed" ta="center" size="sm">
-                    Fresh daily breads using traditional techniques and locally
-                    sourced organic flour
-                  </Text>
-                </Stack>
-              </Stack>
-            </Card>
-
-            <Card
-              radius="lg"
-              p="xl"
-              bg="gray.0"
-              style={{ border: "1px solid var(--mantine-color-gray-3)" }}
-            >
-              <Stack gap="md">
-                <Center>
-                  <IconCoffee size={40} color={colors.primary} />
-                </Center>
-                <Stack gap="xs" align="center">
-                  <Title order={3} size="xl" fw={400} ta="center">
-                    Pastries
-                  </Title>
-                  <Text c="dimmed" ta="center" size="sm">
-                    Delicate pastries paired with ethically sourced, perfectly
-                    roasted coffee blends
-                  </Text>
-                </Stack>
-              </Stack>
-            </Card>
-          </SimpleGrid>
-        </Stack>
-      </Container>
+            {/* Order Note */}
+            <Text size="sm" c="dimmed" ta="center" maw={400} mt="md">
+              We take orders online only. Message us to discuss your custom cake
+              or browse our selection of petit fours.
+            </Text>
+          </Stack>
+        </Container>
+      </Box>
 
       {/* Footer */}
-      <Container size="xl" py={{ base: 30, md: 50 }}>
-        <Divider my="xl" color="gray.4" />
-        <Stack gap="xl" hiddenFrom="sm">
-          <Stack gap="sm" align="center">
+      <Box py={{ base: 30, md: 50 }} bg="white">
+        <Container size="xl">
+          <Divider mb="xl" color="gray.3" />
+
+          {/* Mobile Footer */}
+          <Stack gap="lg" hiddenFrom="sm" align="center">
             <Title
               order={3}
-              size="xl"
+              size="lg"
               fw={400}
               style={{ fontFamily: fonts.heading }}
               c={colors.primary}
             >
               Zallè Patisserie
             </Title>
-            <Text size="sm" c="dimmed">
-              The best
-            </Text>
-          </Stack>
-          <Group justify="center" gap="xl">
-            <Stack gap="xs" align="center">
-              <Text fw={500} size="sm">
-                Quick Links
-              </Text>
+            <Group gap="lg">
+              <ActionIcon
+                component="a"
+                href={instagramLink}
+                target="_blank"
+                size="lg"
+                variant="subtle"
+                color="gray"
+              >
+                <IconBrandInstagram size={22} />
+              </ActionIcon>
+              <ActionIcon
+                component="a"
+                href={whatsappLink}
+                target="_blank"
+                size="lg"
+                variant="subtle"
+                color="gray"
+              >
+                <IconBrandWhatsapp size={22} />
+              </ActionIcon>
+            </Group>
+            <Group gap="md">
               <Anchor href="/menu" c="dimmed" size="sm">
                 Menu
               </Anchor>
@@ -252,46 +309,22 @@ export default function Home() {
               <Anchor href="/contact" c="dimmed" size="sm">
                 Contact
               </Anchor>
-            </Stack>
-            <Stack gap="xs" align="center">
-              <Text fw={500} size="sm">
-                Contact
-              </Text>
-              <Anchor
-                href="https://instagram.com/zallepastry"
-                target="_blank"
-                c="dimmed"
-                size="sm"
-              >
-                @zallepastry
-              </Anchor>
-              <Text c="dimmed" size="sm">
-                +962 79 333 7446
-              </Text>
-            </Stack>
-          </Group>
-        </Stack>
-        <Group justify="space-between" align="flex-start" visibleFrom="sm">
-          <Stack gap="sm">
+            </Group>
+          </Stack>
+
+          {/* Desktop Footer */}
+          <Group justify="space-between" align="center" visibleFrom="sm">
             <Title
               order={3}
-              size="xl"
+              size="lg"
               fw={400}
               style={{ fontFamily: fonts.heading }}
               c={colors.primary}
             >
               Zallè Patisserie
             </Title>
-            <Text size="sm" c="dimmed">
-              The best
-            </Text>
-          </Stack>
 
-          <Group gap="xl">
-            <Stack gap="xs">
-              <Text fw={500} size="sm">
-                Quick Links
-              </Text>
+            <Group gap="xl">
               <Anchor href="/menu" c="dimmed" size="sm">
                 Menu
               </Anchor>
@@ -301,33 +334,40 @@ export default function Home() {
               <Anchor href="/contact" c="dimmed" size="sm">
                 Contact
               </Anchor>
-            </Stack>
-            <Stack gap="xs">
-              <Text fw={500} size="sm">
-                Contact
-              </Text>
-              <Anchor
-                href="https://instagram.com/zallepastry"
-                target="_blank"
-                c="dimmed"
-                size="sm"
-              >
-                @zallepastry
-              </Anchor>
-              <Text c="dimmed" size="sm">
-                +962 79 333 7446
-              </Text>
-            </Stack>
-          </Group>
-        </Group>
+            </Group>
 
-        <Divider my="xl" color="gray.4" />
-        <Center>
-          <Text size="sm" c="dimmed">
-            © 2025 Zallè Patisserie. All rights reserved.
-          </Text>
-        </Center>
-      </Container>
+            <Group gap="md">
+              <ActionIcon
+                component="a"
+                href={instagramLink}
+                target="_blank"
+                size="lg"
+                variant="subtle"
+                color="gray"
+              >
+                <IconBrandInstagram size={22} />
+              </ActionIcon>
+              <ActionIcon
+                component="a"
+                href={whatsappLink}
+                target="_blank"
+                size="lg"
+                variant="subtle"
+                color="gray"
+              >
+                <IconBrandWhatsapp size={22} />
+              </ActionIcon>
+            </Group>
+          </Group>
+
+          <Divider my="xl" color="gray.3" />
+          <Center>
+            <Text size="xs" c="dimmed">
+              © 2026 Zallè Patisserie. Amman, Jordan. All rights reserved.
+            </Text>
+          </Center>
+        </Container>
+      </Box>
     </Box>
   );
 }
