@@ -1,5 +1,4 @@
-"use client";
-
+import { Metadata } from "next";
 import {
   Container,
   Title,
@@ -10,34 +9,66 @@ import {
   Anchor,
   Divider,
   Center,
-  Image,
   Button,
   Card,
   ActionIcon,
-  SimpleGrid,
-  Modal,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { Navbar } from "@/components/Navbar";
-import {
-  IconBrandInstagram,
-  IconBrandWhatsapp,
-  IconArrowLeft,
-} from "@tabler/icons-react";
-import { useState } from "react";
-import Script from "next/script";
+import { IconBrandInstagram, IconBrandWhatsapp } from "@tabler/icons-react";
 import { colors, fonts } from "@/lib/theme";
-import { getProductById } from "../menu";
-import { useParams, useRouter } from "next/navigation";
+import { getProductById, products } from "../menu";
 import { notFound } from "next/navigation";
+import { ProductImageGallery } from "./ProductImageGallery";
+import { BackButton } from "./BackButton";
 
-export default function ProductDetail() {
-  const params = useParams();
-  const router = useRouter();
-  const productId = Number(params.id);
-  const [opened, { open, close }] = useDisclosure(false);
-  const [selectedImage, setSelectedImage] = useState<string>("");
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
 
+// Pre-render all product pages at build time for SEO
+export async function generateStaticParams() {
+  return products.map((product) => ({
+    id: product.id.toString(),
+  }));
+}
+
+// Generate metadata for SEO
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  const product = getProductById(Number(id));
+
+  if (!product) {
+    return {
+      title: "Product Not Found | Zallè Patisserie",
+    };
+  }
+
+  return {
+    title: `${product.name} | Zallè Patisserie`,
+    description: product.longDescription,
+    openGraph: {
+      title: `${product.name} | Zallè Patisserie`,
+      description: product.longDescription,
+      images: product.images.map((img) => ({
+        url: `https://zallepastry.com${img}`,
+        alt: product.name,
+      })),
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${product.name} | Zallè Patisserie`,
+      description: product.longDescription,
+      images: product.images.map((img) => `https://zallepastry.com${img}`),
+    },
+  };
+}
+
+export default async function ProductDetail({ params }: PageProps) {
+  const { id } = await params;
+  const productId = Number(id);
   const product = getProductById(productId);
 
   const whatsappNumber = "+962793337446";
@@ -49,7 +80,7 @@ export default function ProductDetail() {
     notFound();
   }
 
-  // JSON-LD Schema for Google Rich Results
+  // JSON-LD Schema for Google Rich Results - rendered server-side!
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -75,9 +106,8 @@ export default function ProductDetail() {
 
   return (
     <Box>
-      {/* JSON-LD Structured Data for SEO */}
-      <Script
-        id="product-schema"
+      {/* JSON-LD Structured Data - now rendered in initial HTML! */}
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
       />
@@ -87,91 +117,17 @@ export default function ProductDetail() {
 
       {/* Back Button */}
       <Container size="xl" py="md">
-        <Button
-          variant="subtle"
-          color="gray"
-          leftSection={<IconArrowLeft size={18} />}
-          onClick={() => router.back()}
-          style={{ fontWeight: 400 }}
-        >
-          Back to Menu
-        </Button>
+        <BackButton />
       </Container>
 
       {/* Product Content */}
       <Container size="xl" pb={60}>
         <Stack gap="xl">
-          {/* Image Lightbox Modal */}
-          <Modal
-            opened={opened}
-            onClose={close}
-            size="xl"
-            centered
-            padding={0}
-            withCloseButton={false}
-            styles={{
-              content: {
-                backgroundColor: "transparent",
-                boxShadow: "none",
-              },
-              body: {
-                padding: 0,
-              },
-            }}
-          >
-            <Image
-              src={selectedImage}
-              alt={product?.name}
-              radius="md"
-              onClick={close}
-              style={{ cursor: "pointer" }}
-            />
-          </Modal>
-
-          {/* Image Grid */}
-          <SimpleGrid
-            cols={{
-              base: 1,
-              sm: product && product.images.length === 1 ? 1 : 2,
-            }}
-            spacing="md"
-          >
-            {product?.images.map((image, index) => (
-              <Card
-                key={index}
-                radius="lg"
-                p={0}
-                style={{
-                  overflow: "hidden",
-                  border: "1px solid #e9ecef",
-                  cursor: "pointer",
-                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
-                }}
-                onClick={() => {
-                  setSelectedImage(image);
-                  open();
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "scale(1.02)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 24px rgba(0,0,0,0.12)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "scale(1)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
-                <Image
-                  src={image}
-                  alt={`${product.name} - Image ${index + 1}`}
-                  style={{
-                    aspectRatio: "4/3",
-                    objectFit: "cover",
-                  }}
-                />
-              </Card>
-            ))}
-          </SimpleGrid>
+          {/* Interactive Image Gallery (Client Component) */}
+          <ProductImageGallery
+            images={product.images}
+            productName={product.name}
+          />
 
           {/* Product Details */}
           <Stack gap="lg">
