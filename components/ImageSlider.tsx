@@ -15,6 +15,8 @@ const images = [
   "/images/mango.jpeg",
   "/images/paint.jpeg",
   "/images/paint2.jpeg",
+  "/images/choco2.jpeg",
+  "/images/choco3.jpeg",
 ];
 
 // Split images into two rows

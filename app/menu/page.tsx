@@ -21,6 +21,7 @@ import { colors, fonts } from "@/lib/theme";
 import { products } from "./menu";
 import { useState } from "react";
 import { IconBrandInstagram, IconBrandWhatsapp } from "@tabler/icons-react";
+import Script from "next/script";
 
 export default function Shop() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
@@ -40,8 +41,76 @@ export default function Shop() {
   const instagramHandle = "zallepastry";
   const instagramLink = `https://instagram.com/${instagramHandle}`;
 
+  // JSON-LD Schema for Menu/ItemList
+  const menuSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Zallè Patisserie Menu",
+    description:
+      "Artisanal French pastries and cakes from Zallè Patisserie in Amman, Jordan",
+    numberOfItems: products.length,
+    itemListElement: products.map((product, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Product",
+        name: product.name,
+        description: product.description,
+        image: `https://zallepastry.com${product.images[0]}`,
+        url: `https://zallepastry.com/menu/${product.id}`,
+        category: product.category,
+        offers: {
+          "@type": "Offer",
+          price: product.price.toFixed(2),
+          priceCurrency: "JOD",
+          availability: "https://schema.org/InStock",
+        },
+      },
+    })),
+  };
+
+  // JSON-LD Schema for Local Business (Bakery)
+  const bakerySchema = {
+    "@context": "https://schema.org",
+    "@type": "Bakery",
+    name: "Zallè Patisserie",
+    description:
+      "Artisanal French patisserie in Amman, Jordan specializing in handcrafted cakes and pastries",
+    url: "https://zallepastry.com",
+    telephone: "+962793337446",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Amman",
+      addressCountry: "JO",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 31.9454,
+      longitude: 35.9284,
+    },
+    priceRange: "$$",
+    servesCuisine: ["French", "Pastries", "Cakes"],
+    sameAs: [`https://instagram.com/${instagramHandle}`],
+    hasMenu: {
+      "@type": "Menu",
+      url: "https://zallepastry.com/menu",
+    },
+  };
+
   return (
     <Box>
+      {/* JSON-LD Structured Data for SEO */}
+      <Script
+        id="menu-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(menuSchema) }}
+      />
+      <Script
+        id="bakery-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(bakerySchema) }}
+      />
+
       {/* Navigation Header */}
       <Navbar />
 
@@ -148,7 +217,7 @@ export default function Shop() {
                     }}
                   >
                     <Text size="sm" fw={600} c="dark.8">
-                      JOD {product.price.toFixed(0)}
+                      JOD {product.price.toFixed(2)}
                     </Text>
                   </Box>
                 </Box>

@@ -18,9 +18,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Ghazal Bakery - Artisan Delights",
+  title: "Zalle Patisserie",
   description:
     "Premium artisan bakery offering handcrafted pastries, breads, and delectable treats made with the finest ingredients.",
+  icons: {
+    icon: "/zalle.png",
+  },
 };
 
 export default function RootLayout({

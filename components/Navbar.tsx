@@ -4,7 +4,6 @@ import {
   Container,
   Title,
   Group,
-  ActionIcon,
   Flex,
   Text,
   Box,
@@ -14,6 +13,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { colors, fonts } from "@/lib/theme";
 
@@ -49,7 +49,7 @@ export function Navbar() {
               style={{ fontFamily: fonts.heading }}
               c={colors.primary}
             >
-              Zallè Patisserie
+              <Image src="/zalle2.png" alt="logo" width={100} height={100} />
             </Title>
           </Link>
 

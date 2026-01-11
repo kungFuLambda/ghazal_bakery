@@ -72,8 +72,8 @@ export default function Home() {
                 lh={1.7}
                 c="dark.6"
               >
-                Artisan cakes and petit fours, crafted with passion in Amman.
-                Order online for delivery or pickup.
+                Contemporary pastries crafted with passion in Amman. Order
+                online for delivery or pickup.
               </Text>
             </Stack>
 
@@ -254,8 +254,8 @@ export default function Home() {
 
             {/* Order Note */}
             <Text size="sm" c="dimmed" ta="center" maw={400} mt="md">
-              We take orders online only. Message us to discuss your custom cake
-              or browse our selection of petit fours.
+              We take orders online only. Message us for more information or
+              details or browse our selection of pastries.
             </Text>
           </Stack>
         </Container>

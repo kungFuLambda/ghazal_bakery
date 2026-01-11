@@ -14,15 +14,18 @@ import {
   Button,
   Card,
   ActionIcon,
+  SimpleGrid,
+  Modal,
 } from "@mantine/core";
-import { Carousel } from "@mantine/carousel";
-import "@mantine/carousel/styles.css";
+import { useDisclosure } from "@mantine/hooks";
 import { Navbar } from "@/components/Navbar";
 import {
   IconBrandInstagram,
   IconBrandWhatsapp,
   IconArrowLeft,
 } from "@tabler/icons-react";
+import { useState } from "react";
+import Script from "next/script";
 import { colors, fonts } from "@/lib/theme";
 import { getProductById } from "../menu";
 import { useParams, useRouter } from "next/navigation";
@@ -32,6 +35,8 @@ export default function ProductDetail() {
   const params = useParams();
   const router = useRouter();
   const productId = Number(params.id);
+  const [opened, { open, close }] = useDisclosure(false);
+  const [selectedImage, setSelectedImage] = useState<string>("");
 
   const product = getProductById(productId);
 
@@ -44,8 +49,39 @@ export default function ProductDetail() {
     notFound();
   }
 
+  // JSON-LD Schema for Google Rich Results
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.longDescription,
+    image: product.images.map((img) => `https://zallepastry.com${img}`),
+    brand: {
+      "@type": "Brand",
+      name: "Zallè Patisserie",
+    },
+    category: product.category,
+    offers: {
+      "@type": "Offer",
+      price: product.price.toFixed(2),
+      priceCurrency: "JOD",
+      availability: "https://schema.org/InStock",
+      seller: {
+        "@type": "Organization",
+        name: "Zallè Patisserie",
+      },
+    },
+  };
+
   return (
     <Box>
+      {/* JSON-LD Structured Data for SEO */}
+      <Script
+        id="product-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
+
       {/* Navigation Header */}
       <Navbar />
 
@@ -65,49 +101,77 @@ export default function ProductDetail() {
       {/* Product Content */}
       <Container size="xl" pb={60}>
         <Stack gap="xl">
-          {/* Image Carousel */}
-          <Card
-            radius="lg"
-            p={0}
-            style={{
-              overflow: "hidden",
-              border: "1px solid #e9ecef",
+          {/* Image Lightbox Modal */}
+          <Modal
+            opened={opened}
+            onClose={close}
+            size="xl"
+            centered
+            padding={0}
+            withCloseButton={false}
+            styles={{
+              content: {
+                backgroundColor: "transparent",
+                boxShadow: "none",
+              },
+              body: {
+                padding: 0,
+              },
             }}
           >
-            <Carousel
-              withIndicators
-              styles={{
-                root: {
-                  height: "auto",
-                },
-                control: {
-                  backgroundColor: "white",
+            <Image
+              src={selectedImage}
+              alt={product?.name}
+              radius="md"
+              onClick={close}
+              style={{ cursor: "pointer" }}
+            />
+          </Modal>
+
+          {/* Image Grid */}
+          <SimpleGrid
+            cols={{
+              base: 1,
+              sm: product && product.images.length === 1 ? 1 : 2,
+            }}
+            spacing="md"
+          >
+            {product?.images.map((image, index) => (
+              <Card
+                key={index}
+                radius="lg"
+                p={0}
+                style={{
+                  overflow: "hidden",
                   border: "1px solid #e9ecef",
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-                },
-                indicator: {
-                  backgroundColor: colors.primary,
-                  width: 12,
-                  height: 12,
-                  transition: "width 0.2s ease",
-                  "&[data-active]": {
-                    width: 24,
-                  },
-                },
-              }}
-            >
-              {product.images.map((image, index) => (
-                <Carousel.Slide key={index}>
-                  <Image
-                    src={image}
-                    alt={`${product.name} - Image ${index + 1}`}
-                    h={{ base: 280, sm: 380, md: 450 }}
-                    fit="cover"
-                  />
-                </Carousel.Slide>
-              ))}
-            </Carousel>
-          </Card>
+                  cursor: "pointer",
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                }}
+                onClick={() => {
+                  setSelectedImage(image);
+                  open();
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "scale(1.02)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 24px rgba(0,0,0,0.12)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              >
+                <Image
+                  src={image}
+                  alt={`${product.name} - Image ${index + 1}`}
+                  style={{
+                    aspectRatio: "4/3",
+                    objectFit: "cover",
+                  }}
+                />
+              </Card>
+            ))}
+          </SimpleGrid>
 
           {/* Product Details */}
           <Stack gap="lg">

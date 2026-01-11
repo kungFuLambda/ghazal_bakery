@@ -29,7 +29,13 @@ export const products: Product[] = [
     longDescription:
       "Pistachio Frangipane topped with a silky pistachio ganache in a crunchy tart, topped with an exotic whipped coconut ganache & elderflowers. A tropical escape in every bite.",
     price: 4.25,
-    images: ["/images/flower.jpeg"],
+    images: [
+      "/images/flower.jpeg",
+      "/images/flowercut.jpeg",
+      "/images/flowercut2.jpeg",
+      "/images/flowers3.jpeg",
+      "/images/flowers3side.jpeg",
+    ],
     category: "Bite-sized cakes",
   },
   {
@@ -63,18 +69,22 @@ export const products: Product[] = [
     longDescription:
       "Chocolate sponge, crispy chocolate, passionfruit curd and a perfect combination of sweet and sour milk chocolate and passionfruit mousse. Serves 10-12 people. Perfect for celebrations.",
     price: 23.0,
-    images: ["/images/chocolate.jpeg"],
+    images: [
+      "/images/chocolate.jpeg",
+      "/images/choco2.jpeg",
+      "/images/choco3.jpeg",
+    ],
     category: "Cakes",
   },
   {
     id: 6,
     name: "Berry Bliss Cake",
     description:
-      "A fusion of mixed berries; Vanilla sponge, raspberry crispy ganache, mixed berried marmalade and a silky strawberry mousse",
+      "A fusion of mixed berries; Vanilla sponge, raspberry crispy ganache, mixed berries marmalade and a silky strawberry mousse",
     longDescription:
-      "A fusion of mixed berries; Vanilla sponge, raspberry crispy ganache, mixed berried marmalade and a silky strawberry mousse. Serves 10-12 people. A berry lover's dream.",
+      "A fusion of mixed berries; Vanilla sponge, raspberry crispy ganache, mixed berries marmalade and a silky strawberry mousse. Serves 10-12 people. A berry lover's dream.",
     price: 27.0,
-    images: ["/images/paint.jpeg"],
+    images: ["/images/paint2.jpeg", "/images/paint.jpeg"],
     category: "Cakes",
   },
 ];
